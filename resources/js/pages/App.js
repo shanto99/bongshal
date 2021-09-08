@@ -5,6 +5,7 @@ import {CssBaseline, withStyles} from '@material-ui/core';
 import NavBar from '../includes/NavBar';
 import Banner from "../components/Banner";
 import Sidebar from "../components/Sidebar";
+import Categories from "../components/Categories";
 
 const styles = theme => ({
     siteBody: {
@@ -45,7 +46,8 @@ class App extends React.Component {
                     <Sidebar drawerOpen={this.state.drawerOpen}/>
                     <div className={classes.mainContent}>
                         <Banner/>
-                    </div>  
+                        <Categories/>
+                    </div>
                 </div>
             </React.Fragment>
             )
