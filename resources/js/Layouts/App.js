@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {CssBaseline, withStyles} from '@material-ui/core';
 
 import NavBar from '../includes/NavBar';
-import Banner from "../components/Banner";
 import Sidebar from "../components/Sidebar";
-import Categories from "../components/Categories";
+import Home from "../pages/Home";
+import Products from "../pages/products/Product";
 
 const styles = theme => ({
     siteBody: {
@@ -45,12 +46,20 @@ class App extends React.Component {
                 <div className={classes.siteBody}>
                     <Sidebar drawerOpen={this.state.drawerOpen}/>
                     <div className={classes.mainContent}>
-                        <Banner/>
-                        <Categories/>
+                        <Router>
+                            <Switch>
+                                <Route path="/products">
+                                    <Products/>
+                                </Route>
+                                <Route path="/">
+                                    <Home/>
+                                </Route>
+                            </Switch>
+                        </Router>
                     </div>
                 </div>
             </React.Fragment>
-            )
+        )
     }
 }
 
