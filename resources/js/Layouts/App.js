@@ -6,7 +6,7 @@ import {CssBaseline, withStyles} from '@material-ui/core';
 import NavBar from '../includes/NavBar';
 import Sidebar from "../components/Sidebar";
 import Home from "../pages/Home";
-import Products from "../pages/products/Product";
+import Products from "../pages/products/Products";
 
 const styles = theme => ({
     siteBody: {
@@ -42,7 +42,7 @@ class App extends React.Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <NavBar toggleDrawer={this.toggleDrawer}/>
+                <NavBar toggleDrawer={this.toggleDrawer} />
                 <div className={classes.siteBody}>
                     <Sidebar drawerOpen={this.state.drawerOpen}/>
                     <div className={classes.mainContent}>
@@ -62,11 +62,6 @@ class App extends React.Component {
         )
     }
 }
-
 App = withStyles(styles)(App);
 
 export default App;
-
-if (document.getElementById('app')) {
-    ReactDOM.render(<App />, document.getElementById('app'));
-}

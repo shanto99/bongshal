@@ -1,6 +1,7 @@
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, withStyles } from "@material-ui/core";
 import { Inbox, Mail } from "@material-ui/icons";
 import React from "react";
+import {Link} from "react-router-dom";
 
 const styles = theme => ({
   sideDrawer: {
@@ -35,7 +36,7 @@ class Sidebar extends React.Component {
 
   componentDidMount()
   {
-    
+
   }
 
   render()
@@ -48,15 +49,20 @@ class Sidebar extends React.Component {
         anchor="left"
         className={`${classes.sideDrawer} ${!this.props.drawerOpen ? classes.sideDrawerClose : ''}`}
         >
-          <List>
+        <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Mail />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
+            <ListItem>
+                <Link to="/admin">
+                    <ListItemText primary="Admin"/>
+                </Link>
+            </ListItem>
         </List>
-        
+
       </Drawer>
     )
   }

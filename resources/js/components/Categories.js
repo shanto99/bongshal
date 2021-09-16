@@ -2,6 +2,8 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Box, Container, Grid, Typography} from "@material-ui/core";
 
+import { connect } from "react-redux";
+
 class Categories extends React.Component {
     render() {
         return (
@@ -60,4 +62,10 @@ class Categories extends React.Component {
     }
 }
 
-export default Categories;
+const mapStateToProps = (state) => {
+    return {
+        authState: state.authReducer
+    };
+}
+
+export default connect(mapStateToProps)(Categories);
