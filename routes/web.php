@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,12 @@ Route::get('/', function () {
 });
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
-
+Route::middleware(['auth'])->group(function() {
+    Route::get('/user', [AuthController::class, 'getUser']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/create_category', [CategoryController::class, 'create_category']);
+    Route::get('/categories', [CategoryController::class, 'get_categories']);
+});
 Route::fallback(function () {
     return view('welcome');
 });

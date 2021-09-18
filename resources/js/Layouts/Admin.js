@@ -4,6 +4,7 @@ import {Grid} from "@material-ui/core";
 import NavBar from "../includes/admin/navbar/Navbar";
 import Sidebar from "../includes/admin/sidebar/Sidebar";
 import Vendors from "../pages/admin/vendors/Vendors";
+import Categories from "../pages/admin/categories/Categories";
 import {LOG_IN} from "../actions/authActions";
 
 import {connect} from "react-redux";
@@ -19,8 +20,11 @@ class Admin extends React.Component {
                         <Sidebar/>
                     </Grid>
                     <Grid item lg={10}>
-                        <Router>
+                        <Router basename="admin">
                             <Switch>
+                                <Route path="/categories">
+                                    <Categories/>
+                                </Route>
                                 <Route path="/">
                                     <Vendors/>
                                 </Route>
