@@ -1,8 +1,11 @@
 import React from "react";
-import {Box, Button, Container, Grid, List, ListItem, ListItemIcon, ListItemText, TextField} from "@material-ui/core";
+import {Box, Button, Container, Grid, List, FormControl, InputLabel, Select, MenuItem,
+    ListItem, ListItemIcon, ListItemText, TextField, withStyles} from "@material-ui/core";
 
 import {createCategory, getCategories} from "../../../backend/category";
 import {Add as AddIcon} from "@material-ui/icons";
+
+import styles from "./styles";
 
 class Categories extends React.Component {
     constructor(props) {
@@ -14,6 +17,7 @@ class Categories extends React.Component {
         };
 
         this.saveCategory = this.saveCategory.bind(this);
+        this.handleParentCategoryChange = this.handleParentCategoryChange.bind(this);
     }
 
     componentDidMount() {
@@ -23,6 +27,11 @@ class Categories extends React.Component {
                categories: categories
             });
         })
+    }
+
+    handleParentCategoryChange(e)
+    {
+
     }
 
     saveCategory()
@@ -36,6 +45,7 @@ class Categories extends React.Component {
     }
 
     render() {
+        const classes = this.props.classes;
         return (
             <Container maxWidth="lg">
                 <Grid container spacing={2}>
@@ -55,19 +65,35 @@ class Categories extends React.Component {
                     </Grid>
                     <Grid item lg={6} md={12} sm={12}>
                         <Box width="100">
-                            <TextField fullWidth required
-                                       type="text" margin="normal"
-                                       value={this.state.categoryName}
-                                       label="Category"
-                                       onChange={(e) => this.setState({ categoryName: e.target.value })}
-                            />
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                onClick={this.saveCategory}
-                            >
-                                Create
-                            </Button>
+                            <FormControl className={classes.formControl}>
+                                <TextField fullWidth required
+                                           type="text" margin="normal"
+                                           value={this.state.categoryName}
+                                           label="Category"
+                                           onChange={(e) => this.setState({ categoryName: e.target.value })}
+                                />
+                            </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Parent category</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    onChange={this.handleParentCategoryChange}
+                                >
+                                    {this.state.categories.map(category => (
+                                        <MenuItem key={category.id} value={category.id}>{category.category_name}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            <FormControl className={classes.formControl}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    onClick={this.saveCategory}
+                                >
+                                    Create
+                                </Button>
+                            </FormControl>
                         </Box>
                     </Grid>
                 </Grid>
@@ -76,4 +102,4 @@ class Categories extends React.Component {
     }
 }
 
-export default Categories;
+export default withStyles(styles)(Categories);
